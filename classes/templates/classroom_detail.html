@@ -10,7 +10,53 @@
     <p class="card-text" style="color: 000034;">{{classroom.year}}</p>
     <a href="{% url 'classroom-update' classroom.id %}" class="btn" style="background-color: #000034; color: white;">Update</a>
     <a href="{% url 'classroom-delete' classroom.id %}" class="btn" style="background-color: #FFA500; color: #000034;">Delete</a>
+    {% if request.user == classroom.Teacher %}
+<a href="{% url 'Student-ADD' classroom.id %}"><button class ="btn btn-success"> Add Student</button></a>
+{% endif %}
   </div>
 </div>
+
+
+
+<br>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Grade</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for student in students %}
+    <tr>
+   
+
+      <td>{{student.name}}</td>
+       <td>{{student.exam_grade}}</td>
+        {% if request.user == classroom.Teacher %}
+  
+        <td> <a href="{% url 'student-update' student.id %}"><button class="btn btn-primary"> update </button></a> </td>
+         <td><a href="{% url 'student-delete' student.id %}"><button class="btn btn-danger"> delete </button></a> </td>
+{% endif %}
+    </tr>
+
+
+    {% endfor %}
+    
+      
+    
+    
+  </tbody>
+</table>
+
+
+   </span>
+<br>
+	
 
 {% endblock content %}
