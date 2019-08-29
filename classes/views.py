@@ -16,7 +16,7 @@ def classroom_detail(request, classroom_id):
     classroom = Classroom.objects.get(id=classroom_id)
     context = {
         "classroom": classroom,
-        "students" : (Student.objects.filter(classroom=classroom)).order_by("-exam_grade","-name")
+        "students" : (Student.objects.filter(classroom=classroom)).order_by("name","-exam_grade")
     }
     return render(request, 'classroom_detail.html', context)
 
